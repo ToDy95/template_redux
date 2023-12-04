@@ -5,17 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 import ModalComponent from './components/utilsView/Modal';
-import Context from './components/context/Context';
+import { Provider } from 'react-redux'
+import { store } from './store';
 import Toast from './components/utilsView/Toast';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Context>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
       <Toast />
       <ModalComponent />
     </BrowserRouter>
-  </Context>
+  </Provider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

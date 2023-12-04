@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal';
+import { openModal, closeModal } from '../../slices/counter/counterSlice';
 const customStyles = {
   content: {
     top: "50%",
@@ -25,10 +27,11 @@ const customStyles = {
 };
 const ModalComponent = () => {
   let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const open = useSelector(state => state.counter.modal.isOpen)
+  const dispatch = useDispatch()
 
-  function openModal() {
-    setIsOpen(true);
+  function openModalFn() {
+    dispatch(openModal())
   }
 
   function afterOpenModal() {
@@ -36,20 +39,20 @@ const ModalComponent = () => {
     subtitle.style.color = '#f00';
   }
 
-  function closeModal() {
-    setIsOpen(false);
+  function closeModalFn() {
+    dispatch(closeModal())
   }
   return (
-    <div><button onClick={openModal}>Open Modal</button>
+    <div><button onClick={openModalFn}>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={open}
         onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
+        onRequestClose={closeModalFn}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
+        <button onClick={closeModalFn}>close</button>
         <div>I am a modal</div>
         <form>
           <input />

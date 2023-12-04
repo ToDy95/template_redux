@@ -1,7 +1,7 @@
 import React from 'react'
 
 import axios from 'axios';
-export const fetcher = (params) => {
+export const fetcher = async (params) => {
   const options = {
     method: 'GET',
     url: `${process.env.REACT_APP_BASE_URL}${params}`,
